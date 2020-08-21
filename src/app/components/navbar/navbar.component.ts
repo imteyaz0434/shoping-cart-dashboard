@@ -24,17 +24,9 @@ cartCount:any;
   
   }
   search(term: string) {
-    if(term.length>0){
+    if(term.length>=0){
       this.cartService.showSearch(term);
     }
-    // if(!term) {
-    //   this.filterData = this.logs;
-    // } else {
-    //   this.filterData = this.logs.filter(x => 
-    //      x.name.trim().toLowerCase().includes(term.trim().toLowerCase())
-    //   );
-    // }
-    // this.originalLog = this.filterData;
   }
 
 }

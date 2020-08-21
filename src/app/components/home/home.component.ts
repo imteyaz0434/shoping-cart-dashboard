@@ -9,6 +9,7 @@ import { CartService } from 'src/app/services/cart.service';
 export class HomeComponent implements OnInit {
 items:any;
 filterData;
+noData:boolean=false;
   constructor(private cartService:CartService) { }
 
   ngOnInit(): void {
@@ -29,8 +30,9 @@ filterData;
       }else{
         this.filterData = this.items.filter(x => 
           x.name.trim().toLowerCase().includes(val.trim().toLowerCase()));
-     };
+     }
+     this.noData = (this.filterData=='') ? true : false; 
     });  
     
-}
+  }
 }
