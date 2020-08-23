@@ -28,6 +28,9 @@
         <div class="notFound" *ngIf='noData'>
           <h6 class="alert-text">No Data Found</h6>
         </div>
+        <div class="notFound" *ngIf='httpError'>
+          <h6 class="alert-text">Server Error: Failed to Load Items. Please Try again Later!!!!</h6>
+        </div>
     </div>
 </div>
 

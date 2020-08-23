@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   ProductItems:[Items];
   filterData: any;
   noData: boolean = false;
+  httpError:boolean =false;
 
   constructor(private cartService: CartService) {}
 
@@ -23,8 +24,10 @@ export class HomeComponent implements OnInit {
         //console.log(this.ProductItems);
       },
       (error) => {
-        this.noData = true;
-        console.log(error);
+        this.httpError = true;
+        console.log(error.message);
+
+        //alert(error.message);
       }
     );
   }
