@@ -14,8 +14,8 @@
                   <span class="card-title">{{item.name}}</span>
                   <table>
                     <thead>
-                      <tr>
-                          <th class="offamount">&#8377; {{item.price - item.discount}}</th>
+                      <tr class="padding">
+                          <th class="offamount">&#8377;{{item.price - item.discount}}</th>
                           <th class="realamount"><del>{{item.price}}</del></th>
                           <th class="discount">{{item.price | priceCalulater:item.discount}}% off</th>
                       </tr>

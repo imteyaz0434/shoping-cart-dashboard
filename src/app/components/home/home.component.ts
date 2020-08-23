@@ -26,8 +26,6 @@ export class HomeComponent implements OnInit {
       (error) => {
         this.httpError = true;
         console.log(error.message);
-
-        //alert(error.message);
       }
     );
   }
