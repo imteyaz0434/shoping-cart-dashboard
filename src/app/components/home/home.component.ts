@@ -1,38 +1,54 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
+import { Items } from '../../models/model';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-items:any;
-filterData;
-noData:boolean=false;
-  constructor(private cartService:CartService) { }
+  ProductItems:[Items];
+  filterData: any;
+  noData: boolean = false;
 
-  ngOnInit(): void {
-   this.items =  this.cartService.fetch();
-   console.log(this.items);
-   this.checkSearch();
+  constructor(private cartService: CartService) {}
+
+  ngOnInit() {
+    this.cartService.fetch().subscribe(
+      (Cartitem) => {
+        //console.log(Cartitem);
+        this.ProductItems = Cartitem;
+        this.appendData();
+        //console.log(this.ProductItems);
+      },
+      (error) => {
+        this.noData = true;
+        console.log(error);
+      }
+    );
   }
 
-  addToCart(item){
+  appendData() {
+    this.filterData = this.ProductItems;
+    this.checkSearch();
+  }
+
+  addToCart(item) {
     this.cartService.updatecart(item);
   }
 
-  checkSearch(){
-    this.cartService.search$.subscribe(val => {
-      // console.log(val);
-      if(val==''){
-        this.filterData = this.items;
-      }else{
-        this.filterData = this.items.filter(x => 
-          x.name.trim().toLowerCase().includes(val.trim().toLowerCase()));
-     }
-     this.noData = (this.filterData=='') ? true : false; 
-    });  
-    
+  checkSearch() {
+    this.cartService.search$.subscribe((val) => {
+      //console.log(val);
+      if (val == null) {
+        this.filterData = this.ProductItems;
+      } else {
+        this.filterData = this.ProductItems.filter((x) =>
+          x.name.trim().toLowerCase().includes(val.trim().toLowerCase())
+        );
+      }
+      this.noData = this.filterData == '' ? true : false;
+    });
   }
 }
